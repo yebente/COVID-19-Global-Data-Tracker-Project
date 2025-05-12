@@ -1,75 +1,163 @@
+# COVID-19 Data Analysis Project
 
-# COVID-19 Data Dashboard
-
-A data visualization dashboard for COVID-19 statistics, built with React, TypeScript, Tailwind CSS, and recharts.
+A Python-based data analysis and visualization tool for COVID-19 statistics. This project provides comprehensive analysis and visualization of COVID-19 data, including cases, deaths, vaccination rates, and other key metrics across different countries.
 
 ## Features
 
-- Interactive charts for COVID-19 metrics (cases, deaths, vaccinations)
-- Country selection for comparative analysis
-- Time range filtering
-- Responsive design for desktop and mobile viewing
+- Automated data loading and preprocessing using pandas
+- Comprehensive data analysis capabilities:
+  - Country-wise comparisons
+  - Time series analysis
+  - Vaccination tracking
+  - Mortality rate calculations
+- Advanced visualizations using matplotlib and seaborn:
+  - Total cases trends over time
+  - Vaccination progress by country
+  - Case fatality rates
+  - Interactive data exploration
+- Robust error handling and data validation
+- Easy-to-use Python classes for extensible analysis
 
-## Live Demo
+## Project Structure
 
-Visit the [live demo](https://lovable.dev/projects/e4ecd53d-b3c2-4309-b575-c438b9c0a593)
+```
+covid-data-analysis/
+│
+├── covid_data_loader.py     # Data loading and preprocessing
+├── covid_visualizer.py      # Data visualization functions
+├── covid_data.csv          # Sample COVID-19 dataset
+├── requirements.txt        # Python dependencies
+└── README.md              # Project documentation
+```
 
-## Project Setup
+## Prerequisites
 
-### Prerequisites
+- Python 3.8 or higher
+- pip (Python package installer)
 
-- Node.js and npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+The project requires the following Python packages (specified in requirements.txt):
+- pandas >= 2.0.0
+- numpy >= 1.24.0
+- matplotlib >= 3.7.0
+- seaborn >= 0.12.0
 
 ### Installation
 
 1. Clone the repository:
 ```sh
-git clone https://github.com/yourusername/covid-dashboard.git
-cd covid-dashboard
+git clone https://github.com/yourusername/covid-data-analysis.git
+cd covid-data-analysis
 ```
 
-2. Install dependencies:
+2. Create and activate a virtual environment (recommended):
 ```sh
-npm install
+# On Windows
+python -m venv venv
+.\venv\Scripts\activate
+
+# On macOS/Linux
+python3 -m venv venv
+source venv/bin/activate
 ```
 
-3. Start the development server:
+3. Install dependencies:
 ```sh
-npm run dev
+# Make sure you're in the project directory and your virtual environment is activated
+pip install -r requirements.txt
 ```
 
-The application will be available at `http://localhost:5173/`
+### Verifying Installation
+
+To verify that everything is installed correctly, you can run:
+```sh
+python -c "import pandas as pd; import numpy as np; import matplotlib.pyplot as plt; import seaborn as sns; print('All packages installed successfully!')"
+```
+
+## Usage
+
+### Basic Analysis
+
+Run the data loader script for basic analysis:
+```sh
+python covid_data_loader.py
+```
+
+This will display:
+- Total number of data entries
+- List of available countries
+- Latest data date
+- Total cases by country
+- Vaccination progress statistics
+
+### Generating Visualizations
+
+Run the visualizer script to create plots:
+```sh
+python covid_visualizer.py
+```
+
+This generates three visualization files:
+- `total_cases_trend.png`: Time series plot of total cases
+- `vaccination_progress.png`: Stacked bar chart of vaccination status
+- `case_fatality_rate.png`: Bar plot of mortality rates
+
+### Custom Analysis
+
+You can import the classes in your own Python scripts:
+
+```python
+from covid_data_loader import CovidDataLoader
+from covid_visualizer import CovidVisualizer
+
+# Load and preprocess data
+loader = CovidDataLoader()
+data = loader.load_covid_data()
+
+# Create custom visualizations
+visualizer = CovidVisualizer(data)
+
+# Generate specific plots
+visualizer.plot_total_cases_trend(['United States', 'India', 'Kenya'])
+visualizer.plot_vaccination_progress()
+visualizer.plot_case_fatality_rate()
+```
 
 ## Data Source
 
-The project includes a sample COVID-19 dataset in `public/data/covid_data.csv`. This is a simplified dataset for demonstration purposes.
+The project uses a CSV file (`covid_data.csv`) containing the following COVID-19 statistics:
+- Daily and cumulative case counts
+- Death statistics
+- Vaccination data
+- Healthcare system metrics (ICU patients, hospitalizations)
+- Population demographics
+- Economic indicators
 
 For real-world use, you can replace this file with updated COVID-19 data from:
-
 - [Our World in Data COVID-19 dataset](https://github.com/owid/covid-19-data/tree/master/public/data)
 - [Johns Hopkins University CSSE COVID-19 Data](https://github.com/CSSEGISandData/COVID-19)
 
-To use your own data, replace the CSV file while maintaining the same column structure, or update the data loader in `src/lib/data-loader.ts` to match your data format.
+## Troubleshooting
 
-## Python Data Analysis Script
+If you encounter any issues:
 
-The repository also includes a Python script (`covid_data_analyzer.py`) that can be used for offline data analysis. This script provides similar functionality to the web dashboard but as a command-line tool.
+1. Make sure your virtual environment is activated
+2. Verify Python version: `python --version` (should be 3.8 or higher)
+3. Check installed packages: `pip list`
+4. If you need to install packages individually:
+   ```sh
+   pip install pandas>=2.0.0
+   pip install numpy>=1.24.0
+   pip install matplotlib>=3.7.0
+   pip install seaborn>=0.12.0
+   ```
+5. If matplotlib shows errors, you might need additional system libraries:
+   - On Ubuntu/Debian: `sudo apt-get install python3-tk`
+   - On CentOS/RHEL: `sudo yum install python3-tkinter`
+   - On Windows: Usually comes with Python installation
 
-### Using the Python Script
+## Contributing
 
-1. Install required packages:
-```sh
-pip install pandas numpy matplotlib seaborn
-```
-
-2. Run the script:
-```sh
-python covid_data_analyzer.py
-```
-
-3. When prompted, you can either:
-   - Press Enter to use the built-in sample data
-   - Provide the path to your own COVID-19 data CSV file
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
